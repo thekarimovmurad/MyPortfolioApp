@@ -1,0 +1,171 @@
+body {
+    background: linear-gradient(45deg, #4a0080 0%, hsla(60, 100%, 50%, 1) 100%);
+    font-family: "Cascadia Mono", sans-serif;
+    font-weight: 600;
+}
+
+.container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100vh
+}
+
+#terminal {
+    border: 4px solid #424040;
+    width: 700px;
+    height: 500px;
+    background-color: #424040;
+    border-radius: 6px;
+    position: relative;
+}
+
+
+#controls {
+    display: flex;
+    align-items: right;
+}
+
+#user {
+    position: absolute;
+    height: 25px;
+    font-size: 19px;
+    left: 350px;
+    top: 3px;
+    text-align: center;
+    transform: translateX(-50%);
+    color: #9c9b99;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.red-dot {
+    background-color: #F5544D;
+}
+
+.yellow-dot {
+    background-color: #FABD2F;
+}
+
+.green-dot {
+    background-color: #47D043;
+}
+
+#app {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 700px;
+    height: 475px;
+    background-color: #282a35;
+    border-radius: 4px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 32px;
+    padding: 12px;
+    color: #d57336;
+}
+
+.output {
+    padding-left: 20px;
+}
+
+.red {
+    color: #c00647;
+}
+
+.blue {
+    color: #0e8dcb;
+}
+
+.lightBlue {
+    color: #00f2ff;
+}
+
+.green {
+    color: #47D043;
+}
+
+.yellow {
+    color: #FABD2F;
+}
+
+#app .input {
+    display: flex;
+    justify-content: baseline;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#app .input input {
+    border: none;
+    background-color: #282a35 !important;
+    color: #0e8dcb;
+    font-family: "Cascadia Mono", sans-serif;
+    font-weight: 700;
+    caret-color: #c00647;
+    height: 30px;
+    font-size: 16px;
+}
+
+#app .input input:focus {
+    outline: none;
+}
+
+
+#app .output .star li:before {
+    content: "✪";
+    padding-right: 5px;
+    color: #47D043;
+}
+
+#app .output .arrow li:before {
+    content: "»";
+    padding-right: 5px;
+    color: #47D043;
+}
+
+#app .output .arrowRight li:before {
+    content: "→";
+    padding-right: 5px;
+    color: #47D043;
+}
+
+
+#app .output a {
+    text-decoration: none;
+
+    color: #47D043;
+}
+
+
+.input .resultCommand{
+    color: #0e8dcb!important;
+}
+
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+    background-color: none;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #7b7b7b80;
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
