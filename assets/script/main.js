@@ -1,101 +1,116 @@
 $(document).ready(function () {
-    var startDiv = $("<div>").addClass("start");
+    var script;
+    start();
 
-    var paragraphElement = $("<p>");
-    var textNode1 = document.createTextNode("Welcome");
-    var brElement1 = $("<br>");
-    var textNode2 = document.createTextNode("Starting server...");
-    var brElement2 = $("<br>");
-    var textNode3 = document.createTextNode("Type ");
-    var spanElement = $("<span>").addClass("lightBlue").text('"help"');
-    var textNode4 = document.createTextNode(" to see the available commands. All Commands are case sensitive.");
-    var brElement3 = $("<br>");
-    paragraphElement.append(textNode1, brElement1, textNode2, brElement2, textNode3, spanElement, textNode4, brElement3);
-    startDiv.append(paragraphElement);
-    $("#app").append(startDiv);
-
-
-
-
-    var inputDiv = $("<div>").addClass("input");
-    var paragraphElement = $("<p>");
-    var spanRed = $("<span>").addClass("red").text("root");
-    var spanYellow = $("<span>").addClass("yellow").text("@tehekarimovmurad $");
-    paragraphElement.append(spanRed, spanYellow, "&nbsp;");
-    var inputElement = $("<input>").attr("type", "text").attr("id", "textInput");
-    var resultCommand= $("<p>").attr("class", "resultCommand");
-    inputDiv.append(paragraphElement, inputElement,resultCommand);
-    $("#app").append(inputDiv);
-
-    
-
-
-
-
-
-
-
-
-    var outputDiv = $("<div>").addClass("output");
-    var arrowSymbol = document.createTextNode("\u27A4"); // Unicode for right arrow
-    var clsSpan = $("<span>").addClass("lightBlue").text('"cls"');
-    var exitSpan = $("<span>").addClass("lightBlue").text('"exit"');
-    var textNode = document.createTextNode(" Available commands listed below. Type ");
-    var ulElement = $("<ul>").addClass("green arrowRight");
-    var liAbout = $("<li>").text("About");
-    var liSkills = $("<li>").text("Skills");
-    var liContact = $("<li>").text("Contact");
-    ulElement.append(liAbout, liSkills, liContact);
-    outputDiv.append(arrowSymbol, textNode, clsSpan, " to clear & ", exitSpan, " to close terminal. ", ulElement);
-    $("#app").append(outputDiv);
-
-
-
-
-    var outputDiv = $("<div>").addClass("output");
-    var paragraphElement = $("<p>").html("Hello! I'm Murad Karimov, a dedicated C# and .NET developer driven by a profound passion for coding. I excel in crafting high-quality solutions that seamlessly blend user requirements with technical standards, leveraging my expertise in C# and .NET development alongside front-end skills.<br><span class='yellow'>My Expertise:</span>");
-    var ulElement = $("<ul>");
-    var li1 = $("<li>").text("Proficient in C# and .NET development.");
-    var li2 = $("<li>").text("Skilled in front-end development.");
-    var li3 = $("<li>").text("Passionate about crafting robust solutions.");
-    ulElement.append(li1, li2, li3);
-    var interestSpan = $("<span>").addClass("yellow").text("Areas of Interest: ");
-    var interestParagraph = $("<p>").html("Apart from my core strengths in C# and .NET, I'm deeply intrigued by embedded systems, artificial intelligence, and C/C++ programming. Exploring these realms not only broadens my skill set but also equips me to tackle diverse challenges head-on.");
-    paragraphElement.append(ulElement, interestSpan, "<br>", interestParagraph);
-    outputDiv.append(paragraphElement);
-    $("#app").append(outputDiv);
-
-
-
-    var outputDiv = $("<div>").addClass("output");
-    var paragraphElement = $("<p>").html("In case you need me, drop a message via <a href='mailto:thekarimovmurad@gmail.com'>thekarimovmurad@gmail.com</a>. I assure you to get back to you as soon as I can. Below are both clickable links and usable commands.");
-    var ulElement = $("<ul>").addClass("green arrow");
-    var liLinkedIn = $("<li>").html("<a href='https://www.linkedin.com/in/murad-karimov-686a73233' target='_blank'>LinkedIn</a>");
-    var liMail = $("<li>").html("<a href='mailto:thekarimovmurad@gmail.com'>Mail</a>");
-    var liMedium = $("<li>").html("<a href='https://medium.com/@thekarimovmurad' target='_blank'>Medium</a>");
-    var liGitHub = $("<li>").html("<a href='https://github.com/thekarimovmurad' target='_blank'>GitHub</a>");
-    var liStackoverflow = $("<li>").html("<a href='https://stackoverflow.com/users/16714418/thekarimovmurad' target='_blank'>Stackoverflow</a>");
-    var liInstagram = $("<li>").html("<a href='https://instagram.com/thekarimovmurad' target='_blank'>Instagram</a>");
-    var liUpwork = $("<li>").html("<a href='https://www.upwork.com/freelancers/~0153a590c035ba88d6' target='_blank'>Upwork</a>");
-    var liFacebook = $("<li>").html("<a href='https://facebook.com/thekarimovmurad' target='_blank'>Facebook</a>");
-    var liTwitter = $("<li>").html("<a href='https://twitter.com/thekarimovmurad' target='_blank'>Twitter</a>");
-    ulElement.append(liLinkedIn, liMail, liMedium, liGitHub, liStackoverflow, liInstagram, liUpwork, liFacebook, liTwitter);
-    var infoParagraph = $("<p>").text("Just type those social media names in terminal as commands and it'll take you to the respective page.");
-    outputDiv.append(paragraphElement, ulElement, infoParagraph);
-    $("#app").append(outputDiv);
-
-
-
-
-
-
-
-    inputElement.on('keypress', function(event) {
-        if (event.which === 13) { // 13 is the keycode for Enter key
-            var inputText = $(this).val(); // Retrieve the text from the input field
-            resultCommand.append(inputText); // Append the text to the result paragraph
-            $(this).remove(); // Clear the input field
+    $("#app").on('keypress', 'input', function (event) {
+        if (event.which === 13) {
+            var inputText = $("#textInput").val();
+            $(".resultCommand:last").append(inputText);
+            $("#textInput").remove();
+            script = inputText.toLowerCase();
+            switch (script) {
+                case "help":
+                    help();
+                    break;
+                case "contact":
+                    contact();
+                    break;
+                case "skills":
+                    skills();
+                    break;
+                case "about":
+                    about();
+                    break;
+                case "cls":
+                    cls();
+                    break;
+                    case "exit":
+                        exit();
+                        break;
+                case "linkedin":
+                    openLink("https://www.linkedin.com/in/murad-karimov-686a73233");
+                    break;
+                case "mail":
+                    openLink("mailto:thekarimovmurad@gmail.com");
+                    break;
+                case "medium":
+                    openLink("https://medium.com/@thekarimovmurad");
+                    break;
+                case "github":
+                    openLink("https://github.com/thekarimovmurad");
+                    break;
+                case "stackoverflow":
+                    openLink("https://stackoverflow.com/users/23206813/karimov-murad");
+                    break;
+                case "upwork":
+                    openLink("https://upwork.com/thekarimovmurad");
+                    break;
+                case "facebook":
+                    openLink("https://facebook.com/thekarimovmurad");
+                    break;
+                case "instagram":
+                    openLink("https://instagram.com/thekarimovmurad");
+                    break;
+                case "twitter":
+                    openLink("https://twitter.com/thekarimovmurad");
+                    break;
+                case "resume":
+                    openLink("/assets/resume.pdf");
+                    break;
+                default:
+                    comandError(script);
+            }
         }
     });
-    
+    $('.dot.red-dot').click(function() {
+        exit();
+    });
 });
+
+function openLink(url) {
+    window.open(url, "_blank");
+    input();
+}
+function start() {
+    var valStart = '<div class="start"><p>Welcome</p><p>Starting server...</p><p>Type <span class="lightBlue">"help"</span> to see the available commands. All Commands are case sensitive.</p></div>';
+    $("#app").append(valStart);
+    input();
+}
+function help() {
+    var valHelp = '<div class="output">&RightArrowBar; Available commands listed below. Type <span class="lightBlue">"cls"</span> to clear & <span class="lightBlue">"exit"</span> to close terminal.<ul class="green arrowRight"><li>About</li><li>Skills</li><li>Contact</li></ul></div>';
+    $("#app").append(valHelp);
+    input();
+}
+function about() {
+    var valAbout = '<div class="output"><p>Hello! I\'m Murad Karimov, a dedicated C# and .NET developer driven by a profound passion for coding. I excel in crafting high-quality solutions that seamlessly blend user requirements with technical standards, leveraging my expertise in C# and .NET development alongside front-end skills.<br><span class="yellow">My Expertise:</span><ul><li>Proficient in C# and .NET development.</li><li>Skilled in front-end development.</li><li>Passionate about crafting robust solutions.</li></ul><span class="yellow">Areas of Interest: </span><br>Apart from my core strengths in C# and .NET, I\'m deeply intrigued by embedded systems, artificial intelligence, and C/C++ programming. Exploring these realms not only broadens my skill set but also equips me to tackle diverse challenges head-on.</p></div>';
+    $("#app").append(valAbout);
+    input();
+}
+function contact() {
+    var valContact = '<div class="output"><p>In case you need me, drop a message via <a href="mailto:thekarimovmurad@gmail.com">thekarimovmurad@gmail.com</a>. I assure you to get back to you as soon as I can. Below are both clickable links and usable commands.</p><ul class="green arrow"><li><a href="https://www.linkedin.com/in/murad-karimov-686a73233" target="_blank">LinkedIn</a></li><li><a href="mailto:thekarimovmurad@gmail.com">Mail</a></li><li><a href="https://medium.com/@thekarimovmurad" target="_blank">Medium</a></li><li><a href="https://github.com/thekarimovmurad" target="_blank">GitHub</a></li><li><a href="https://stackoverflow.com/users/23206813/karimov-murad" target="_blank">Stack Overflow</a></li><li><a href="https://instagram.com/thekarimovmurad" target="_blank">Instagram</a></li><li><a href="https://www.upwork.com/fl/muradkarimov" target="_blank">Upwork</a></li><li><a href="https://facebook.com/thekarimovmurad" target="_blank">Facebook</a></li><li><a href="https://twitter.com/thekarimovmurad" target="_blank">Twitter</a></li></ul><p>Just type those social media names in the terminal as commands, and it\'ll take you to the respective page.</p></div>';
+    $("#app").append(valContact);
+    input();
+}
+function skills() {
+    var valSkills = '<div class="output"><p>I can build a program </p><ul class="star yellow"><li>.NET (Web & Desktop)</li><li>C#, JS, Python, C/C++, Java</li><li>MSSQL, MYSQL</li><li>RESTful API</li><li>Git, Github</li><li>HTML, CSS, Bootstrap, JQuery</li><li>React, VueJS</li></ul><p><span class="red">&#9873;</span> Available for freelance, remote, or contract-based opportunities. Type <span class="lightBlue">"Resume"</span> you can view my resume.</p></div>';
+    $("#app").append(valSkills);
+    input();
+}
+function comandError(comand) {
+    var valComandError = `<div class="output"><p class="red">Command not found: ${comand}</p><p>Type <span class="lightBlue">"help"</span> or <span class="lightBlue">"cls"</span> for assistance.</p></div>`;
+    $("#app").append(valComandError);
+    input();
+}
+function cls() {
+    $('#app').empty();
+    input();
+}
+function input() {
+    var valInput = '<div class="input"><p><span class="red">root<span class="yellow">@tehekarimovmurad $</span>&nbsp;</p><p class="resultCommand"></p><input type="text" id="textInput"></div>';
+    $("#app").append(valInput);
+}
+function exit() {
+    $('.container').empty();
+    var valExit = '<div class="exit"><p>Coded by Murad Karimov</p></div>';
+    $(".container").append(valExit);
+}

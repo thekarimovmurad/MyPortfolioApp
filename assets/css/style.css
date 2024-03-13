@@ -1,7 +1,7 @@
 body {
     background: linear-gradient(45deg, #4a0080 0%, hsla(60, 100%, 50%, 1) 100%);
     font-family: "Cascadia Mono", sans-serif;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .container {
@@ -168,4 +168,16 @@ body {
     border-radius: 4px;
     background-color: #7b7b7b80;
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+.exit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.exit p {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
 }
