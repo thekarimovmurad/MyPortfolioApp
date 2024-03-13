@@ -108,6 +108,8 @@ function cls() {
 function input() {
     var valInput = '<div class="input"><p><span class="red">root<span class="yellow">@tehekarimovmurad $</span>&nbsp;</p><p class="resultCommand"></p><input type="text" id="textInput"></div>';
     $("#app").append(valInput);
+    $("#textInput").focus();
+
 }
 function exit() {
     $('.container').empty();
